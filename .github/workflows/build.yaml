@@ -1,0 +1,108 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+# GitHub recommends pinning actions to a commit SHA.
+# To get a newer version, you will need to update the SHA.
+# You can also reference a tag or branch, but the action may change without warning.
+
+name: Publish Docker image
+ 
+env:
+  OCI_REPO: "oci://ghcr.io/reberp/manifests/${{ github.event.repository.name }}"
+  IMAGE_NAME: "ghcr.io/reberp/personal-blog"
+  
+on:
+  push:
+    branches: ['main']
+  release:
+    types: [published]        
+
+jobs:
+  build_dockerfile_and_push:
+    name: Push Docker image to Docker Hub
+    runs-on: ubuntu-latest
+    outputs: 
+      image-digest: ${{ steps.build.outputs.Digest }}
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+        
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3      
+      
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+      
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/reberp/personal-blog
+        
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        id: build
+        with:
+          #context: .
+          #file: ./Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          # labels: ${{ steps.meta.outputs.labels }}
+      
+      - name: get hash
+        run: |
+          echo ${{ steps.build.outputs.Digest }}
+
+  compile_manifest_and_push:
+    outputs:
+      output1: ${{ steps.generate-manifests.outputs.manifest-files }}  
+    needs: build_dockerfile_and_push
+    runs-on: ubuntu-latest
+    steps:
+      - name: inputs
+        run: |
+          echo ${{ needs.build_dockerfile_and_push.outputs.image-digest }}
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Flux CLI
+        uses: fluxcd/flux2/action@main
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+      - name: generate-manifests
+        id: generate-manifests
+        run: |
+          mkdir manifests
+          cd ./deploy/kustomize
+          
+          kustomize edit set image $IMAGE_NAME=$IMAGE_NAME@${{ needs.build_dockerfile_and_push.outputs.image-digest }}
+          cd ../../
+          kustomize build ./deploy/kustomize  --output ./manifests
+          
+          ls ./manifests/
+          cat ./manifests/*
+
+          ls ./deploy/kustomize/
+          echo "kustomize produced:"
+          ls manifests/
+      - name: Push manifests
+        run: |
+          #flux push artifact $OCI_REPO:$(git rev-parse --short HEAD) \
+          flux push artifact $OCI_REPO:latest \ #$(git rev-parse --short HEAD) \
+            --path="./manifests" \
+            --source="$(git config --get remote.origin.url)" \
+            --revision="latest@sha1:$(git rev-parse HEAD)"          
+            #--revision="$(git branch --show-current)@sha1:$(git rev-parse HEAD)"          
+      - name: Deploy manifests to staging
+        run: |
+          flux tag artifact $OCI_REPO:latest --tag $(git rev-parse --short HEAD)    
+          # flux tag artifact $OCI_REPO:$(git rev-parse --short HEAD) --tag staging   
