@@ -26,3 +26,4 @@ COPY --from=build /opt/HugoApp/public .
 
 # Expose port 80
 EXPOSE 80/tcp
+EXPOSE 443/tcp

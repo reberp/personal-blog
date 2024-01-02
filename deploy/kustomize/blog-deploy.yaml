@@ -14,8 +14,21 @@ spec:
       labels:
         app: blog
     spec:
+      volumes:
+      - name: le-certs
+        secret:
+          secretName: le-certs
+      - name: nginx-cm
+        configMap:
+          name: nginx-conf
       containers:
       - image: ghcr.io/reberp/personal-blog
+      #- image: ghcr.io/reberp/test
         imagePullPolicy: Always
         name: blog
+        volumeMounts:
+        - mountPath: /etc/nginx/ssl/
+          name: le-certs
+        - mountPath: /etc/nginx/conf.d
+          name: nginx-cm
   replicas: 1
