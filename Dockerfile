@@ -3,9 +3,7 @@
 FROM alpine:latest AS build
 
 # Install the Hugo go app.
-RUN apk add --update hugo
-RUN apk add --update go
-RUN apk add --update git
+RUN apk add --update hugo go git
 
 WORKDIR /opt/HugoApp
 
@@ -13,10 +11,11 @@ WORKDIR /opt/HugoApp
 COPY ./ .
 
 # Run Hugo in the Workdir to generate HTML.
-RUN hugo 
+RUN hugo --minify --gc --enableGitInfo
 
 # Stage 2
-FROM nginx:1.25-alpine
+#FROM nginx:1.25-alpine
+FROM cgr.dev/chainguard/nginx:latest
 
 # Set workdir to the NGINX default dir.
 WORKDIR /usr/share/nginx/html
