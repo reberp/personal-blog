@@ -14,7 +14,7 @@ spec:
   - port: 443
     name: https
     protocol: TCP
-    targetPort: 443
+    targetPort: 8443
   selector:
     app: blog
   type: ClusterIP

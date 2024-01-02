@@ -2,7 +2,7 @@ apiVersion: v1
 data:
   default.conf: |-
       server {
-          listen 443 ssl;
+          listen 8443 ssl;
           server_name patrickreber.com;
 
           #ssl_certificate /etc/nginx/ssl/nginx-selfsigned.crt;
