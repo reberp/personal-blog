@@ -3,4 +3,5 @@ kind: Kustomization
 resources:
   - blog-deploy.yaml
   - blog-service.yaml
+  - blog-nginx-cm.yaml
 
