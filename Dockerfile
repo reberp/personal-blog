@@ -11,7 +11,7 @@ WORKDIR /opt/HugoApp
 COPY ./ .
 
 # Run Hugo in the Workdir to generate HTML.
-RUN hugo --minify --gc --enableGitInfo
+RUN hugo --minify --gc
 
 # Stage 2
 #FROM nginx:1.25-alpine
