@@ -3,6 +3,7 @@
 title: Hello World
 date: 2024-01-01
 description: First Post
+image: hello-world.jpg
 tags: 
     - GitOps
     - AWS
@@ -42,9 +43,9 @@ For now, this is how it exists. I expect to have separate short posts about a fe
 ### Later:
 While I don't know what I'll change as I experiment with new tools that I want to learn, I think moving from AWS to a homelab is probably a good choice. Nobody realizes how much cloud computing costs until they start paying for it (there's another topic for discussion here about how easy it seems to dupe people when cost is presented on an hourly basis).
 
-# The future
+# The Future
 Hopefully I continue to find interest in organizing and releasing thoughts and I continue to learn. I definitely could have put some thoughts done after short-term experiments with tools and frameworks, or after taking certain challenging certification tests in the past that typically garner write-ups (looking at you OffSec). Still, A few specific posts that I may put together: 
-* Comparison of the setup on AWS for a blog cluster via EC2 'connect', CloudFormation, and Terraform
+* Comparison of the setup on AWS for a blog cluster via EC2 'connect', CloudFormation, and Terraform/Ansible
 * Notes on experimenting with cloudflared and Route53 hosted zone
 * Notes on the current GitOps automation and why it's not really ideal and what I would like to do
 * Issues with using cloudflared with ingress objects and certificate management that I still haven't figured out
