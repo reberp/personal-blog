@@ -24,5 +24,5 @@ WORKDIR /usr/share/nginx/html
 COPY --from=build /opt/HugoApp/public .
 
 # Expose port 80
-EXPOSE 80/tcp
-EXPOSE 443/tcp
+EXPOSE 8080/tcp
+EXPOSE 8443/tcp
