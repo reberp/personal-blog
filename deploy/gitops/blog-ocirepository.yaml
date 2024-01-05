@@ -2,7 +2,7 @@ apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: OCIRepository
 metadata:
   name: blog
-  namespace: default
+  namespace: blog
 spec:
   interval: 1m0s
   url: oci://ghcr.io/reberp/manifests/personal-blog

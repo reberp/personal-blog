@@ -30,6 +30,7 @@ In addition to that, since lately I'm exploring Kubernetes and various component
 ## The How
 Intending to use a statically hosted website, there's a ton of pretty simple ways to do it that would make it simpler to just write and display content. It could be anything from github pages, s3 static hosting, any number of cheap online nodes with a public IP, among others. Those just didn't seem as interesting since part of the intent is to give a place to do some experimenting, so I wen't with something unnecessarily complicated, although still simple enough to get up quickly. 
 
+
 ### Now: 
 For now, this is how it exists. I expect to have separate short posts about a few pieces of this that were more interesting to dig into. 
 ![EC2 Nodes](Startup_1.png)
