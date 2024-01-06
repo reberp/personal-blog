@@ -2,15 +2,14 @@ Going to try to both put together a place I can write some stuff down, and exper
 
 Tons of notes off-git while I hopefully make them presentable, but should cover a few learning points. 
 
-Ideas:
+
+Ideas for infrastructure + content:
 * [x] A domain: patrickreber.com
 * [x] Kubeadm created, EC2 hosted K8s cluster 
 	* [ ] Post about it and why that choice
-	* [ ] CF/UserData to spin up/down 
-	* [ ] TF/Ansible to spin up/down
 	* [ ] An alternative (waiting on homelab)
 * [x] A way to get to it
-	* [ ] Post about it and the comparisons
+	* [ ] Post about it and the comparisons (why tunnel vs r53 vs NLB)
 * [x] A framework
 	* [ ] Configured so that it doesn't look like shit
  		* [ ] Poison 
@@ -18,11 +17,15 @@ Ideas:
 		* [X] https://github.com/CaiJimmy/hugo-theme-stack-starter
 	* [ ] post
 * [X] GitOps automation - Commit to git, blog updates
+	* [ ] Better scope for what gets triggered
 	* [ ] Post
  	* [ ] GitOps v2: Jenkins in cluster running SCA/DCA?
-* [ ] IB Images
 * [ ] K8s additions:
+	* [ ] SOPS/Sealed Secrets for LE-Certs and Tunnel-Creds 
 	* [ ] Storage: rook/ceph (not necessary for the use case but need to learn it more. Different test case/repo?)
 	* [ ] Service mesh (test istio ingress since nginx didn't work out w/ CF)
- 	* [ ] netpols (and properly namespacing)
-  	* [ ] GitOps -> Helm? 
+	* [ ] netpols (and properly namespacing)
+	* [ ] GitOps -> Helm? 
+	* [ ] Going to need active communicating workloads at some point to test more
+* [ ] Deployment via CF ([Here eventually](https://github.com/reberp/AWS-automations/tree/main/CloudFormation))
+* [ ] Deployment via Ansible/TF ([Here eventually](https://github.com/reberp/AWS-automations/))
