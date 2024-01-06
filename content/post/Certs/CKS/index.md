@@ -2,7 +2,7 @@
 title: CKS Exam
 date: 2024-01-06
 description: Taking the Certified Kubernetes Security Specialist Exam
-#image: hello-world.jpg
+image: feelings.jpg
 tags: 
     - K8s
     - CKS
