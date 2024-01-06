@@ -49,7 +49,8 @@ While I generally like performance-based tests, what I dislike about this series
 * Understand the relationships. This can be between pieces of the question or pieces of the question and the current environment. 
 * Orient to the environment. You have to understand what already exists in the environment, in the case you're supposed to tie into it or fix it. 
 * Do the thing that the question asks.
-* Confirm you did the thing right. 
+* Confirm you did the thing right.
+  
 All of this can make the test feel more like an exercise in speed typing than engineering. It's quite common to see study guides recommend you set the following aliases first thing, as well as moving on from any question where you find yourself stuck for more than a few minutes. 
 ```
 alias k=kubectl
