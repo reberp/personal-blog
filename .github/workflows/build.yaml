@@ -15,7 +15,7 @@ env:
   
 on:
   push:
-    branches: ['dev']
+    branches: ['dev','main']
   release:
     types: [published]        
 
