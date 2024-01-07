@@ -11,12 +11,14 @@ tags:
     - Hugo
 categories:
     - Blogging
+weight: 1    
 ---
 # Hello World
 
 ## The Where
 
-[patrickreber.com](https://patrickreber.com)
+On the website here: [patrickreber.com](https://patrickreber.com)  
+And defined on github here: https://github.com/reberp/personal-blog
 
 If it's not up, it's because I have the node turned off. I actually have it set on an AWS [instance-scheduler](https://docs.aws.amazon.com/solutions/latest/instance-scheduler-on-aws/solution-overview.html) to not be up overnight and a few extra hours. Since this is going to be largely a means to experiment and I haven't moved it off of paid EC2 nodes (yet, see below), I don't think I'll pay for it all the time. 
 
