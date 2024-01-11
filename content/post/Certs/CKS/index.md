@@ -10,7 +10,7 @@ tags:
 categories:
     - Certifications
 ---
-# Hello World
+# CKS Exam
 
 ## Background
 
