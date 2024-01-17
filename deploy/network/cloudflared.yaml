@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: cloudflared
-  namespace: blog
+  namespace: cloudflared
 spec:
   selector:
     matchLabels:
@@ -70,11 +70,11 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: cloudflared
-  namespace: blog
+  namespace: cloudflared
 data:
   config.yaml: |
     # Name of the tunnel you want to run
-    tunnel: example-tunnel
+    tunnel: blog-tunnel
     credentials-file: /etc/cloudflared/creds/credentials.json
     # Serves the metrics server under /metrics and the readiness server under /ready
     metrics: 0.0.0.0:2000
@@ -100,8 +100,12 @@ data:
       #service: http://test-server:80
       #service: http://ingress-nginx-controller.ingress-nginx:80
       #service: http://blog:80
-      service: https://blog:443
+      service: https://blog.blog:443
       #service: https://ingress-nginx-controller.ingress-nginx:443
+      originRequest:
+        noTLSVerify: true
+    - hostname: staging.patrickreber.com
+      service: https://blog.test:443
       originRequest:
         noTLSVerify: true
     # This rule matches any traffic which didn't match a previous rule, and responds with HTTP 404.
