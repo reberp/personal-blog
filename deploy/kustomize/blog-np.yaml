@@ -7,13 +7,8 @@ spec:
   podSelector: {}
   policyTypes:
   - Ingress
-  #flannel doesn't seem to be enforcing this default deny? 
-  #ingress:
-  #- from:
-  #  - namespaceSelector:
-  #      matchLabels:
-  #        kubernetes.io/metadata.name: cloudflared
-  #  ports:
-  #   - port: 443
-  #egress:
-  ingress: []
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: cloudflared
