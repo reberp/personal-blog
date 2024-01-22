@@ -86,7 +86,7 @@ jobs:
           
           kustomize edit set image $IMAGE_NAME=$IMAGE_NAME@${{ needs.build_dockerfile_and_push.outputs.image-digest }}
           cd ../../
-          kustomize build ./deploy/kustomize  --output ./manifests
+          kustomize build ./deploy/blog  --output ./manifests
           
           ls ./manifests/
           cat ./manifests/*
