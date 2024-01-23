@@ -82,7 +82,7 @@ jobs:
         id: generate-manifests
         run: |
           mkdir manifests
-          cd ./deploy/kustomize
+          cd ./deploy/blog
           
           kustomize edit set image $IMAGE_NAME=$IMAGE_NAME@${{ needs.build_dockerfile_and_push.outputs.image-digest }}
           cd ../../
