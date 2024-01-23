@@ -6,13 +6,13 @@ metadata:
 spec:
   podSelector: {}
   policyTypes:
-#  - Ingress
+  - Ingress
   - Egress
-#  ingress:
-#  - from:
-#    - namespaceSelector:
-#        matchLabels:
-#          kubernetes.io/metadata.name: blog
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: blog
   egress:
   - to:
     - namespaceSelector:
@@ -25,8 +25,11 @@ spec:
       port: 7844
     - protocol: TCP
       port: 7844
-    - protocol: UDP
-      port: 53
+#    - protocol: UDP
+#      port: 53
+#    - protocol: TCP
+#      port: 53
     to:
     - ipBlock:
         cidr: 0.0.0.0/0
+
