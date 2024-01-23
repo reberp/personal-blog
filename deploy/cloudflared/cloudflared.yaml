@@ -74,7 +74,7 @@ metadata:
 data:
   config.yaml: |
     # Name of the tunnel you want to run
-    tunnel: blog-tunnel
+    tunnel: internal-blog-tunnel
     credentials-file: /etc/cloudflared/creds/credentials.json
     # Serves the metrics server under /metrics and the readiness server under /ready
     metrics: 0.0.0.0:2000
@@ -93,6 +93,10 @@ data:
     # The first rule proxies traffic to the httpbin sample Service defined in app.yaml
     - hostname: tunnel.patrickreber.com
       service: http://web-service:80
+    - hostname: internal.patrickreber.com
+      service: https://blog.blog:443
+      originRequest:
+        noTLSVerify: true
     # This rule sends traffic to the built-in hello-world HTTP server. This can help debug connectivity
     # issues. If hello.example.com resolves and tunnel.example.com does not, then the problem is
     # in the connection from cloudflared to your local service, not from the internet to cloudflared.

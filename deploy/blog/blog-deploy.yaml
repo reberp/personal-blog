@@ -21,6 +21,10 @@ spec:
       - name: nginx-cm
         configMap:
           name: nginx-conf
+      - name: tmp
+        emptyDir: {}
+      - name: run
+        emptyDir: {}
       containers:
       - image: ghcr.io/reberp/personal-blog
       #- image: ghcr.io/reberp/test
@@ -31,4 +35,10 @@ spec:
           name: le-certs
         - mountPath: /etc/nginx/conf.d
           name: nginx-cm
+        - name: run
+          mountPath: /var/run
+        - name: tmp
+          mountPath: /var/lib/nginx/tmp/
+        securityContext:
+          readOnlyRootFilesystem: true
   replicas: 1

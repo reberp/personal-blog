@@ -1,14 +1,9 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: allow-all-ingress
-  namespace: cloudflared
+  name: default-deny
 spec:
   podSelector: {}
-  ingress:
-  - {}
-  egress:
-  - {}
   policyTypes:
   - Ingress
-  - Egress
+
