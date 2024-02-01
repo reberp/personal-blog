@@ -5,3 +5,5 @@ resources:
   - cf-dns.yaml
   - cf-istio.yaml
   - cf-np.yaml
+  - cf-prometheus.yaml
+

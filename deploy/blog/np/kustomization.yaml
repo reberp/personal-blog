@@ -5,3 +5,4 @@ resources:
   - blog-dns.yaml
   - blog-istio.yaml
   - blog-np.yaml
+  - blog-prometheus.yaml
