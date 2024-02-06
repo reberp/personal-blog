@@ -1,5 +1,5 @@
 Check it out at [patrickreber.com](https://patrickreber.com)
-
+ 
 Going to try to both put together a place I can write some stuff down, and experiment with a bit of a contrived example for K8s and other related DSO concepts. 
 
 Tons of notes off-git while I hopefully make them presentable, but should cover a few learning points. 
