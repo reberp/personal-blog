@@ -24,7 +24,34 @@ spec:
       # from one I had originall used to test here. 
       # Doesn't seem to pull them all in? 
       #https://raw.githubusercontent.com/istio/istio/release-1.20/samples/addons/prometheus.yaml
+          # Some experimenting with how to overwrite ports that aren't right. 
+          # But it's also pulling two scrapes and one is right so should just drop the other one. 
+          # - honor_labels: true
+          #   job_name: kubernetes-pods
+          #   kubernetes_sd_configs:
+          #   - role: pod       
+          #   relabel_configs:  
+          #   - action: replace
+          #     source_labels: [__meta_kubernetes_pod_name]
+          #     target_label: node  
+          #   - source_labels: [__meta_kubernetes_pod_name] 
+          #     action: keep   
+          #     regex: 'image.*'
+          #   - source_labels: [__address__]
+          #     action: replace
+          #     regex: ([^:]+):.*
+          #     replacement: $1:9001
+          #     target_label: __address__
         additionalScrapeConfigs: |
+          - honor_labels: true 
+            job_name: kubernetes-pods
+            kubernetes_sd_configs:
+            - role: pod       
+            relabel_configs:
+            - action: replace
+              source_labels:
+              - __meta_kubernetes_pod_name
+              target_label: node               
           - honor_labels: true
             job_name: kubernetes-service-endpoints
             kubernetes_sd_configs:
@@ -156,60 +183,6 @@ spec:
               - __meta_kubernetes_service_name
               target_label: service
           - honor_labels: true
-            job_name: kubernetes-pods
-            kubernetes_sd_configs:
-            - role: pod
-            relabel_configs:
-            - action: keep
-              regex: true
-              source_labels:
-              - __meta_kubernetes_pod_annotation_prometheus_io_scrape
-            - action: drop
-              regex: true
-              source_labels:
-              - __meta_kubernetes_pod_annotation_prometheus_io_scrape_slow
-            - action: replace
-              regex: (https?)
-              source_labels:
-              - __meta_kubernetes_pod_annotation_prometheus_io_scheme
-              target_label: __scheme__
-            - action: replace
-              regex: (.+)
-              source_labels:
-              - __meta_kubernetes_pod_annotation_prometheus_io_path
-              target_label: __metrics_path__
-            - action: replace
-              regex: (\d+);(([A-Fa-f0-9]{1,4}::?){1,7}[A-Fa-f0-9]{1,4})
-              replacement: '[$2]:$1'
-              source_labels:
-              - __meta_kubernetes_pod_annotation_prometheus_io_port
-              - __meta_kubernetes_pod_ip
-              target_label: __address__
-            - action: replace
-              regex: (\d+);((([0-9]+?)(\.|$)){4})
-              replacement: $2:$1
-              source_labels:
-              - __meta_kubernetes_pod_annotation_prometheus_io_port
-              - __meta_kubernetes_pod_ip
-              target_label: __address__
-            - action: labelmap
-              regex: __meta_kubernetes_pod_annotation_prometheus_io_param_(.+)
-              replacement: __param_$1
-            - action: labelmap
-              regex: __meta_kubernetes_pod_label_(.+)
-            - action: replace
-              source_labels:
-              - __meta_kubernetes_namespace
-              target_label: namespace
-            - action: replace
-              source_labels:
-              - __meta_kubernetes_pod_name
-              target_label: pod
-            - action: drop
-              regex: Pending|Succeeded|Failed|Completed
-              source_labels:
-              - __meta_kubernetes_pod_phase
-          - honor_labels: true
             job_name: kubernetes-pods-slow
             kubernetes_sd_configs:
             - role: pod
@@ -260,4 +233,4 @@ spec:
               source_labels:
               - __meta_kubernetes_pod_phase
             scrape_interval: 5m
-            scrape_timeout: 30s        
+            scrape_timeout: 30s                      

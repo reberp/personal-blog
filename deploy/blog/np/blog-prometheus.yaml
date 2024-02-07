@@ -9,12 +9,12 @@ spec:
   - Ingress
   ingress:
   - from:
-    - podSelector:
-        matchLabels:
-          app: prometheus
-      namespaceSelector:
-        matchLabels:
-          kubernetes.io/metadata.name: istio-system
+    #- podSelector:
+    #    matchLabels:
+    #      app: prometheus
+    #  namespaceSelector:
+    #    matchLabels:
+    #      kubernetes.io/metadata.name: istio-system
     ports:
     - port: 15020
       protocol: TCP
