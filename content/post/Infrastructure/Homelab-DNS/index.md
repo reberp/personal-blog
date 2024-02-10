@@ -63,7 +63,7 @@ spec:
 
 ### Issue #1: external url access
 Sometime early on, I realized that because I was using Calico and set the pod-network-cidr in Kubeadm to be 192.168.0.0/16, that range conflicted with the routers DHCP address range, and when I had a pod attempt to reach my router page, the request wasn't NAT'd properly and failed. At that point, I remade the cluster with a pod range of 10.10.0.0/16. I did try and update it with steps from this post here (https://stackoverflow.com/questions/60176343/how-to-make-the-pod-cidr-range-larger-in-kubernetes-cluster-deployed-with-kubead), but ran into issues and since this is just a test, it wasn't worth fixing. 
-![cidr.png][cidr]
+![cidr](cidr.png)
 
 After remaking with a new IP range, the pods could reach 192.168 services. 
 
@@ -101,7 +101,7 @@ k run nginx --image=nginx
 k expose pod/nginx --type=ClusterIP --port=80 --target-port=80 --name=nginx2
 ```
 
-![service.png][service]
+![service](service.png)
 
 ### Issue #2: Advertising IP
 This took the longest to figure out, and came down to needing two nodes. At first, this was a single node cluster and I couldn't get MetalLB to respond to ARP requests. 
@@ -121,8 +121,9 @@ Since I had tried executing arping from other nodes and it didn't work, that see
 
 After adding a second node, everything worked fine and the node started responding and the logs look normal. 
 
-![logs.png][speaker-logs]
-![arp.png][arp]
+![speaker-logs](logs.png)
+
+![arp](arp.png)
 
 ## Istio Config
 
