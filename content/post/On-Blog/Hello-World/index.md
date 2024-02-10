@@ -21,11 +21,8 @@ And defined on github here: https://github.com/reberp/personal-blog
 
 If it's not up, it's because I have the node turned off. I actually have it set on an AWS [instance-scheduler](https://docs.aws.amazon.com/solutions/latest/instance-scheduler-on-aws/solution-overview.html) to not be up overnight and a few extra hours. Since this is going to be largely a means to experiment and I haven't moved it off of paid EC2 nodes (yet, see below), I don't think I'll pay for it all the time. 
 
-<<<<<<< HEAD
 If it's not up, it's because I have the node turned off. I actually have it set on an AWS [instance-scheduler](https://docs.aws.amazon.com/solutions/latest/instance-scheduler-on-aws/solution-overview.html) to not be up overnight and a few extra hours. Since this is going to be largely a means to experiment and I haven't moved it off of paid EC2 nodes (yet, see below), I don't think I'll pay for it all the time. 
 
-=======
->>>>>>> main
 
 ## The Why
 I've thought for a long time that I need a place to document things I've learned, I'm trying to learn, things I've done, thoughts about various pieces of life in and out of work. The ideal place certainly isn't 6-deep in a folder on my PC, though that's where it lived for a long time (and where most of it will definitely stay). 

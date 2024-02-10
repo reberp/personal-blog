@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: egress-istiod
+  namespace: cloudflared
+spec:
+  podSelector: {}
+  policyTypes:
+  - Egress
+#  - Ingress
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: istio-system
+    ports:
+    - port: 15012
